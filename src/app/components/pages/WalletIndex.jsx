@@ -27,7 +27,7 @@ class WalletIndex extends React.Component {
     }
 
     render() {
-        const { dispatchSubmit } = this.props;
+        const { dispatchSubmit, currencies } = this.props;
         const { username } = this.state;
         const { submitting, valid, handleSubmit } = this.state.login;
         return (
@@ -60,6 +60,17 @@ class WalletIndex extends React.Component {
                         </button>
                     </div>
                 </form>
+                {currencies && (
+                    <div>
+                        <p>
+                            SBD {currencies.getIn(['SBD', 'quote']).toString()}
+                        </p>
+                        <p>
+                            STEEM{' '}
+                            {currencies.getIn(['STEEM', 'quote']).toString()}
+                        </p>
+                    </div>
+                )}
             </div>
         );
     }
@@ -70,8 +81,10 @@ module.exports = {
     component: connect(
         (state, ownProps) => {
             const initialValues = {};
+            const currencies = state.app.get('currencies');
             return {
                 initialValues,
+                currencies,
             };
         },
         dispatch => {

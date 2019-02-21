@@ -104,7 +104,7 @@ export default class UserProfile extends React.Component {
         const username = current_user ? current_user.get('username') : null;
 
         let { section } = this.props.routeParams;
-        if (!section) section = 'blog';
+        if (!section) section = 'transfers';
 
         // Loading status
         const status = global_status
